@@ -1,55 +1,227 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>QR Contacts</title>
   <base href="/QR-Contacts/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+
+  <title>QR Form</title>
+  <style>
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .qr-container {
+      text-align: center;
+      margin-top: 10px;
+    }
+    #qr-code {
+      max-width: 200px;
+      height: auto;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+    .form-button {
+      margin-top: 20px;
+    }
+    @media screen and (min-width: 769px) {
+      .form-fields {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .form-field {
+        width: calc(50% - 1em);
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="contact-info">
+  <div class="container">
+    <h1 class="title">Welcome to QR Website</h1>
+
+    <form>
+      <h2 class="subtitle">Contact Information</h2>
+      <div class="form-fields">
+        <div class="form-field">
+          <div class="field">
+            <label class="form-label"><i class="fas fa-user"></i> First Name</label>
+            <div class="control">
+              <input class="input" type="text" id="first-name" placeholder="Enter your first name">
+            </div>
+          </div>
+        </div>
+        <div class="form-field">
+          <div class="field">
+            <label class="form-label"><i class="fas fa-user"></i> Last Name</label>
+            <div class="control">
+              <input class="input" type="text" id="last-name" placeholder="Enter your last name">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="field">
+            <label class="form-label"><i class="fas fa-envelope"></i> Email</label>
+            <div class="control">
+              <input class="input" type="email" id="email" placeholder="Enter your email">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="field">
+            <label class="form-label"><i class="fas fa-phone"></i> Phone</label>
+            <div class="control">
+              <input class="input" type="text" id="phone" placeholder="Enter your phone number">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="field">
+            <label class="form-label"><i class="fab fa-whatsapp"></i> WhatsApp</label>
+            <div class="control">
+              <input class="input" type="text" id="whatsapp" placeholder="Enter your WhatsApp number">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="field">
+            <label class="form-label"><i class="fab fa-linkedin"></i> LinkedIn</label>
+            <div class="control">
+              <input class="input" type="text" id="linkedin" placeholder="Enter your LinkedIn URL">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="field">
+            <label class="form-label"><i class="fab fa-facebook"></i> Facebook</label>
+            <div class="control">
+              <input class="input" type="text" id="facebook" placeholder="Enter your Facebook URL">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="field">
+            <label class="form-label"><i class="fas fa-briefcase"></i> Work</label>
+            <div class="control">
+              <input class="input" type="text" id="work" placeholder="Enter your work information">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="field">
+            <label class="form-label"><i class="fas fa-building"></i> Company</label>
+            <div class="control">
+              <input class="input" type="text" id="company" placeholder="Enter your company name">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="control form-button">
+            <button class="button is-primary" id="generate-qr">Generate QR Code</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="qr-container">
+      <span>
+        offline qr
+        <img id="qr-code" src="" alt="QR Code">
+      </span>
+      <span>
+        online qr
+        <img id="qrurl-code" src="" alt="QR Url Code">
+      </span>
+    </div>
   </div>
-  <script type="text/javascript">
-    // Single Page Apps for GitHub Pages
-    // https://github.com/rafrex/spa-github-pages
-    // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-    // ----------------------------------------------------------------------
-    // This script checks to see if a redirect is present in the query string
-    // and converts it back into the correct url and adds it to the
-    // browser's history using window.history.replaceState(...),
-    // which won't cause the browser to attempt to load the new url.
-    // When the single page app is loaded further down in this file,
-    // the correct url will be waiting in the browser's history for
-    // the single page app to route accordingly.
-    (function (l) {
-        if (l.search) {
-            var q = {};
-            l.search.slice(1).split('&').forEach(function (v) {
-                var a = v.split('=');
-                q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-            });
-            if (q.p !== undefined) {
-                window.history.replaceState(null, null,
-                    l.pathname.slice(0, -1) + (q.p || '') +
-                    (q.q ? ('?' + q.q) : '') +
-                    l.hash
-                );
-            }
-        }
-    }(window.location))
-</script>
-<script src="script.js"></script>
-<script integrity="">
-if ('serviceWorker' in navigator) {
-window.addEventListener('load', () => {
-  navigator.serviceWorker.register('2048_Game/service-worker.js')
-    .then(registration => {
-      console.log('Service worker registered:', registration);
-    })
-    .catch(error => {
-      console.error('Service worker registration failed:', error);
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#generate-qr').click(function(e) {
+        e.preventDefault();
+        generateQRCode();
+      });
+
+      $('#first-name, #last-name, #email, #phone, #whatsapp, #linkedin, #facebook, #work, #company').change(function() {
+        generateQRCode();
+      });
+
+      function generateQRCode() {
+        var firstName = $('#first-name').val();
+        var lastName = $('#last-name').val();
+        var email = $('#email').val();
+        var phone = $('#phone').val();
+        var whatsapp = $('#whatsapp').val();
+        var linkedin = $('#linkedin').val();
+        var facebook = $('#facebook').val();
+        var work = $('#work').val();
+        var company = $('#company').val();
+
+        var vCardData = createVCard(firstName, lastName, email, phone, whatsapp, linkedin, facebook, work, company);
+        let pageurl="https://sharaf-mansour.github.io/QR-Contacts/Loader";
+
+
+        var QrUrlDate =`${(`${firstName}~${lastName}~${email}~${phone}~${whatsapp}~${linkedin}~${facebook}~${work}~${company}`)}`
+        var compressedString =`${pageurl}?`+LZString.compressToEncodedURIComponent(QrUrlDate);
+        console.log(compressedString); 
+
+        var qr = new QRious({
+          element: document.getElementById('qr-code'),
+          value: vCardData,
+          size: 200,
+          background: $('#background-color').val(),
+          foreground: $('#foreground-color').val(),
+          level: 'H',
+          padding: null,
+          mime: 'image/png'
+        });
+
+
+        var qrUrl = new QRious({
+          element: document.getElementById('qrurl-code'),
+          value: compressedString,
+          size: 200,
+          background: $('#background-color').val(),
+          foreground: $('#foreground-color').val(),
+          level: 'H',
+          padding: null,
+          mime: 'image/png'
+        });
+      }
+
+      function createVCard(firstName, lastName, email, phone, whatsapp, linkedin, facebook, work, company) {
+        var vCard = `BEGIN:VCARD
+VERSION:3.0
+N:${lastName};${firstName};;;
+FN:${firstName} ${lastName}
+EMAIL:${email}
+TEL;TYPE=CELL:${phone}
+TEL;TYPE=WHATSAPP:${whatsapp}
+URL;TYPE=LINKEDIN:${linkedin}
+URL;TYPE=FACEBOOK:${facebook}
+ORG:${company}
+TITLE:${work}
+END:VCARD`;
+
+        return vCard;
+      }
     });
-});
-}</script></body>
+  </script>
+</body>
 </html>
