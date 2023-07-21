@@ -26,7 +26,7 @@ $(document).ready(function () {
 
         var vCardData = createVCard(firstNameValue, lastNameValue, emailValue, phoneValue, titleValue, companyValue, workInfoValue);
 
-        var pageurl = "https://github.com/2Hasan2.github.io/Qr-Contact/profile.html";
+        var pageurl = window.location.href+"/Profile";
         var QrUrlDate = `${firstNameValue}~${lastNameValue}~${emailValue}~${phoneValue}~${titleValue}~${companyValue}~${workInfoValue}~${locationValue}~${facebookValue}~${linkedinValue}~${telegramValue}`;
         var compressedString = `${pageurl}?` + LZString.compressToEncodedURIComponent(QrUrlDate);
 
