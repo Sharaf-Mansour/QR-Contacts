@@ -26,7 +26,7 @@ $(document).ready(function () {
 
         var vCardData = createVCard(firstNameValue, lastNameValue, emailValue, phoneValue, titleValue, companyValue, workInfoValue);
 
-        var pageurl = window.location.href+"/Profile";
+        var pageurl = window.location.href+"profile";
         var QrUrlDate = `${firstNameValue}~${lastNameValue}~${emailValue}~${phoneValue}~${titleValue}~${companyValue}~${workInfoValue}~${locationValue}~${facebookValue}~${linkedinValue}~${telegramValue}`;
         var compressedString = `${pageurl}?` + LZString.compressToEncodedURIComponent(QrUrlDate);
 

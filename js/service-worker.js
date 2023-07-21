@@ -1,4 +1,4 @@
-const CACHE_NAME = 'Qr-cache-v1';
+const CACHE_NAME = 'Qr-cache-v1.1';
 const urlsToCache = [
     '/',
     '/styles/style.css',
