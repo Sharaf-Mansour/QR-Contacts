@@ -1,4 +1,4 @@
-var url = "https://github.com/2Hasan2.github.io/Qr-Contact/profile.html?BIQwziB2B+C2D2ALEsCmATaiBOBGALAKwDMuADAAIDmsIAlgDYB0AxvLNGboYfrgOwA2ABz5B0AGbZ4kAC4ACVJEwA5APIAVeQHV42ANbQQDAB7yJ8AK7KQsujOioqATwAOsySBaoARvHiGADJ0kPoYAJIwGqgMTtgoQA";
+var url = window.location.href;
 var input = LZString.decompressFromEncodedURIComponent(url.slice(url.indexOf("?") + 1));
 var url = url.slice(0, url.indexOf("?") + 1) + input;
 let data = url.slice(url.indexOf('?') + 1).split('~');
