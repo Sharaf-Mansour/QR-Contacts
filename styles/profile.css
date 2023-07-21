@@ -229,7 +229,7 @@ button svg {
     border-radius: 15px;
     width: 100%;
     height: 100%;
-    background: url(/imgs/map.png), lightgray 50% / cover no-repeat;
+    background: url(imgs/map.png), lightgray 50% / cover no-repeat;
 }
 
 footer {
