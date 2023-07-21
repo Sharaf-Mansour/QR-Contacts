@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="/styles/profile.css">
+    <link rel="stylesheet" href="styles/profile.css">
 </head>
 <body>
         <div class="main">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="mycard">
                     <div class="img">
-                        <img src="/imgs/man.png" alt="">
+                        <img src="imgs/man.png" alt="">
                         <div id="phone" class="call"><a>call</a></div>
                     </div>
                     <div class="info">
@@ -106,7 +106,7 @@
     <script integrity="">
     if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/js/service-worker.js')
+      navigator.serviceWorker.register('js/service-worker.js')
         .then(registration => {
           console.log('Service worker registered:', registration);
         })
@@ -117,6 +117,6 @@
     }
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
