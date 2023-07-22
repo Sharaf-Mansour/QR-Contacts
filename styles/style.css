@@ -151,11 +151,11 @@ svg {
 }
 
 .name {
-    font-size: 60px;
+    font-size: 50px;
 }
 
 .job {
-    font-size: 21px;
+    font-size: 25px;
 }
 
 .link {
@@ -290,25 +290,6 @@ input,
 input:focus,
 #work-info:focus {
     outline: 4px solid #36BBE4;
-}
-
-.btn-QR {
-    display: flex;
-    padding: 4px 30px;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    border: none;
-    border-radius: 10px;
-    background: #36BBE4;
-    color: #FFF;
-    text-align: center;
-    font-family: Cairo;
-    font-size: 25px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 165.9%;
-    text-transform: capitalize;
 }
 
 /* Add a general style for smaller screens (laptops) */

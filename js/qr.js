@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-
-
     $('#generate-qr').click(function (e) {
         e.preventDefault();
         generateQRCode();
@@ -24,9 +22,12 @@ $(document).ready(function () {
         var linkedinValue = $("#linkedin").val();
         var telegramValue = $("#telegram").val();
 
-        var vCardData = createVCard(firstNameValue, lastNameValue, emailValue, phoneValue, titleValue, companyValue, workInfoValue);
+        $(".name").text(firstNameValue + " " + lastNameValue);
+        $(".job").text(titleValue);
 
-        var pageurl = window.location.href+"profile";
+        var vCardData = createVCard(firstNameValue, lastNameValue, emailValue, phoneValue, titleValue, companyValue, workInfoValue, locationValue, facebookValue, linkedinValue, telegramValue);
+
+        var pageurl = window.location.href + "profile";
         var QrUrlDate = `${firstNameValue}~${lastNameValue}~${emailValue}~${phoneValue}~${titleValue}~${companyValue}~${workInfoValue}~${locationValue}~${facebookValue}~${linkedinValue}~${telegramValue}`;
         var compressedString = `${pageurl}?` + LZString.compressToEncodedURIComponent(QrUrlDate);
 
@@ -34,19 +35,20 @@ $(document).ready(function () {
             element: document.getElementById('qr-code'),
             value: vCardData,
             size: 200,
-            background: "#ffffff",
-            foreground: "#000000",
+            background: "#fff",
+            foreground: "#1278C2 ",
             level: 'H',
             padding: null,
             mime: 'image/png'
+
         });
 
         var qrUrl = new QRious({
             element: document.getElementById('qrurl-code'),
             value: compressedString,
             size: 200,
-            background: $('#background-color').val(),
-            foreground: $('#foreground-color').val(),
+            background: "#fff",
+            foreground: "#1278C2 ",
             level: 'H',
             padding: null,
             mime: 'image/png'
