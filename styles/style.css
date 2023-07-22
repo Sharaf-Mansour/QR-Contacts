@@ -225,11 +225,13 @@ footer span a {
     min-width: 40%;
     margin-top: 200px;
     transform: scale(0.85);
+    overflow: hidden;
 }
 
 form {
     display: flex;
     flex-direction: column;
+    background: linear-gradient(90deg, #7fc5e6, #3fbde8);
     gap: 20px;
     padding: 30px;
     width: 100%;
