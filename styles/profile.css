@@ -85,7 +85,7 @@ body {
     height: 96px;
     bottom: 0px;
     right: 0px;
-    background: #36BBE4;
+    background: #0F7ECE;
     padding: 4px 30px;
     gap: 10px;
     border-radius: 50px 0px 0px 0px;
@@ -126,11 +126,11 @@ body {
 
 /* .info span number 2 */
 .info span:nth-child(2) {
-    color: var(--dark-blue, #1782C7);
+    color: var(--dark-blue, #36BBE4);
     font-family: Cairo;
-    font-size: 25px;
+    font-size: 35px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 165.9%;
     text-transform: capitalize;
 }
@@ -142,6 +142,17 @@ body {
     align-items: center;
     gap: 15px;
     align-self: stretch;
+}
+
+.reviews {
+    color: var(--dark-blue, #1782C7);
+    text-align: center;
+    font-family: Cairo;
+    font-size: 35.57px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 165.9%;
+    text-transform: capitalize;
 }
 
 .mycard .btns {
@@ -160,7 +171,7 @@ body {
     flex: 1 0 0;
     align-self: stretch;
     border-radius: 10px;
-    background: #E8F5FF;
+    background: #DFEAF1;
     color: var(--dark-blue, #1782C7);
     text-align: center;
     font-family: Cairo;
@@ -264,4 +275,57 @@ footer span a {
 
 a {
     text-decoration: none;
+}
+
+/* make it responseve with phones */
+@media screen and (max-width: 1200px) {
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: none;
+    }
+
+    .main,
+    .card,
+    .board .title {
+        gap: 20px;
+    }
+
+    footer,
+    .mycard {
+        gap: 15px;
+    }
+
+    .main {
+        transform: none;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .board {
+        padding: 0;
+    }
+
+    .board .title {
+        align-items: center;
+    }
+
+    .title span {
+        text-align: center;
+    }
+
+    .board .map {
+        height: 300px;
+    }
 }
