@@ -1,15 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <base href="/QR-Contacts/"/>
+    <base href="/QR-Contacts/"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
     <title>Document v1.2</title>
+    <style>
+        #mapid {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px 0 rgba(0,0,0,.2);
+            overflow: hidden;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all .3s ease-in-out;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+             perspective-origin: 50% 50%;
+            transform-origin: 50% 50%;
+        }
+
+        #mapid.show {
+            display: block;
+        }
+        #close.show {
+            display: block;
+        }
+     .close {
+        display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #000;
+            cursor: pointer;
+            z-index: 9999;
+        }
+    </style>
 </head>
 <body>
+    <div id="map"   >
+        <span id="close" class="close" >&times;</span>
+
+    <div id="mapid"   >
+    </div>
 <div class="main">
 <div class="content">
+
 
     <div class="card-container offline">
         <div class="cardtitle">offline qr code</div>
@@ -27,15 +73,14 @@
                 <img id="qr-code">
         </div>
         <span class="link">
-            Qr-contact.com
-        </span>
+         </span>
         <div class="logo"></div>
     </div>
 
         <div class="btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z" fill="white"/>
-            </svg>Download your V-Card<svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
+            </svg>Download your Offline QR<svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z" fill="white"/>
             </svg>
         </div>
@@ -98,7 +143,8 @@
     <div class="form-row">
         <div class="input-wrapper">
             <label for="location">Location:</label>
-            <input type="text" id="location" name="location" placeholder="Enter Location...">
+            <button type="button" onclick="SelectLocation()">Click me</button>
+           <input type="text" id="location" name="location" placeholder="Enter Location..." disabled >
         </div>
     </div>
 
@@ -109,7 +155,9 @@
             <input id="work-info" name="work-info" placeholder="Enter Work Information...">
         </div>
     </div>
-
+    <div class="form-row">
+        <input type="color" id="colorPicker" value="#1278C2">
+     </div>
     <!-- Social Media Information -->
     <div class="form-row">
         <div class="input-wrapper">
@@ -150,14 +198,14 @@
                 <img id="qrurl-code">
         </div>
         <span class="link">
-            Qr-contact.com
-        </span>
+            <a  id="linkContact" href="">Your link</a>
+         </span>
         <div class="logo"></div>
     </div>
         <div id="generate-qr" class="btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z" fill="white"/>
-            </svg>Download your V-Card<svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
+            </svg>Download your Online QR<svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z" fill="white"/>
             </svg>
         </div>
@@ -169,6 +217,12 @@
     <span><a href="">privacy and policy</a></span>
 </footer>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+
 <script type="text/javascript">
     // Single Page Apps for GitHub Pages
     // https://github.com/rafrex/spa-github-pages
