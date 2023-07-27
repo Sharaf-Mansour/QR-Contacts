@@ -1,28 +1,31 @@
+
+
 const map = L.map('mapid');
-function SelectLocation(){
+function SelectLocation() {
     $("#mapid").toggleClass("show");
     $("#close").toggleClass("show");
     $("#mapid").css("height", "100vh");
     $("#mapid").css("width", "100%");
     $("#mapid").css("z-index", "1");
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-     maxZoom: 18,
-}).addTo(map);
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-         latitude = position.coords.latitude;
-         longitude = position.coords.longitude;
-        map.setView([latitude, longitude], 13);
-    }, () => {
-        console.error('Error: The Geolocation service failed.');
-    });
-} else {
-    console.error('Error: Your browser doesn\'t support geolocation.');
+        maxZoom: 18,
+    }).addTo(map);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
+            map.setView([latitude, longitude], 13);
+        }, () => {
+            console.error('Error: The Geolocation service failed.');
+        });
+    } else {
+        console.error('Error: Your browser doesn\'t support geolocation.');
+    }
 }
 
-
-}
-
+$("#btn-location").click(function () {
+    SelectLocation();
+});
 
 
 let latitude = 0;
@@ -38,20 +41,20 @@ $(document).ready(function () {
 
     });
 
-let marker;
+    let marker;
 
     map.on('click', (event) => {
         latitude = event.latlng.lat;
         longitude = event.latlng.lng;
-       if (marker) {
-           marker.remove();
-       }
-       marker = L.marker([latitude, longitude]).addTo(map);
-       marker.bindPopup(`Latitude: ${latitude}<br>Longitude: ${longitude}`).openPopup();
-       $("#location").val(latitude + "," + longitude);
-       generateQRCode();
-   
-   });
+        if (marker) {
+            marker.remove();
+        }
+        marker = L.marker([latitude, longitude]).addTo(map);
+        marker.bindPopup(`Latitude: ${latitude}<br>Longitude: ${longitude}`).openPopup();
+        $("#location").val(latitude + "," + longitude);
+        generateQRCode();
+
+    });
     $('#generate-qr').click(function (e) {
         e.preventDefault();
         generateQRCode();
@@ -81,9 +84,9 @@ let marker;
 
         var pageurl = window.location.href + "profile.html";
         var QrUrlDate = `${firstNameValue}~${lastNameValue}~${emailValue}~${phoneValue}~${titleValue}~${companyValue}~${workInfoValue}~${locationValue}~${facebookValue}~${linkedinValue}~${telegramValue}~${latitude}~${longitude}`;
-      var compressToEncodedURIComponent = LZString.compressToEncodedURIComponent(QrUrlDate);
+        var compressToEncodedURIComponent = LZString.compressToEncodedURIComponent(QrUrlDate);
         var compressedString = `${pageurl}?` + compressToEncodedURIComponent;
-        $("#linkContact").attr("href",  "profile.html?" + compressToEncodedURIComponent);
+        $("#linkContact").attr("href", "profile.html?" + compressToEncodedURIComponent);
         var qr = new QRious({
             element: document.getElementById('qr-code'),
             value: vCardData,
@@ -132,7 +135,7 @@ let marker;
                     background: "#fff"
                 });
             }
-         });
+        });
 
         function isLightColor(color) {
             const hex = color.replace("#", "");
@@ -142,7 +145,7 @@ let marker;
             const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
             return luma > 160;
         }
-        
+
     }
 
     function createVCard(firstName, lastName, email, phone, title, company, workInfo, location, facebook, linkedin, telegram) {
