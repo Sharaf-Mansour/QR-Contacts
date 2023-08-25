@@ -110,7 +110,7 @@ $(document).ready(function () {
             mime: 'image/png'
         });
 
-        $("#colorPicker").on("input", () => {
+        $("#colorPicker").on("blur", () => {
             const color = $("#colorPicker").val();
             if (isLightColor(color)) {
                 background = "#000";
