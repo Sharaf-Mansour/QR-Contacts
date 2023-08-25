@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <base href="/QR-Contacts/"/>
     <meta charset="UTF-8">
+    <base href="/QR-Contacts/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="manifest.webmanifest" rel="manifest" integrity="" />
     <link rel="apple-touch-icon" sizes="512x512" href="logp.png" integrity="" />
@@ -21,25 +22,27 @@
             z-index: 9999;
             background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 0 15px 0 rgba(0,0,0,.2);
+            box-shadow: 0 0 15px 0 rgba(0, 0, 0, .2);
             overflow: hidden;
             padding: 0;
             box-sizing: border-box;
             transition: all .3s ease-in-out;
             transform-style: preserve-3d;
             backface-visibility: hidden;
-             perspective-origin: 50% 50%;
+            perspective-origin: 50% 50%;
             transform-origin: 50% 50%;
         }
 
         #mapid.show {
             display: block;
         }
+
         #close.show {
             display: block;
         }
-     .close {
-        display: none;
+
+        .close {
+            display: none;
             position: absolute;
             top: 10px;
             right: 10px;
@@ -50,230 +53,247 @@
         }
     </style>
 </head>
+
 <body>
-    <div id="map"   >
-        <span id="close" class="close" >&times;</span>
+    <div id="map">
+        <span id="close" class="close">&times;</span>
 
-    <div id="mapid"   >
-    </div>
-<div class="main">
-<div class="content">
-
-
-    <div class="card-container offline">
-        <div class="cardtitle">offline qr code</div>
-    <div class="card">
-        <div class="logo"></div>
-        <span class="title">
-        </span>
-        <span class="name">
-            Your Name
-        </span>
-        <div class="job"> 
-            Your Job or title
+        <div id="mapid">
         </div>
-        <div id="QR-contaner">
-                <img id="qr-code">
-        </div>
-        <span class="link">
-         </span>
-        <div class="logo"></div>
-    </div>
+        <div class="main">
+            <div class="content">
 
-        <div class="btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z" fill="white"/>
-            </svg>Download your Offline QR<svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z" fill="white"/>
-            </svg>
-        </div>
-</div>
 
-  
+                <div class="card-container offline">
+                    <div class="cardtitle">offline qr code</div>
+                    <div class="card">
+                        <div class="logo"></div>
+                        <span class="title">
+                        </span>
+                        <span class="name">
+                            Your Name
+                        </span>
+                        <div class="job">
+                            Your Job or title
+                        </div>
+                        <div id="QR-contaner">
+                            <img id="qr-code">
+                        </div>
+                        <span class="link">
+                        </span>
+                        <div class="logo"></div>
+                    </div>
 
-<div class="form-container">
-  <div class="image">
-    <img src="imgs/Frame.png" alt="">
-  </div>
- <form >
-    <div class="form-row">
-        <div id="dropZone" class="drop-zone">
-             <img id="previewImage">
-        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
-  <path d="M43.9644 87.8908L55.7801 76.1742C61.4814 70.5196 64.3325 67.6927 67.6036 66.6592C70.4808 65.7504 73.5734 65.7837 76.4303 66.7548C79.6787 67.8591 82.4677 70.747 88.0455 76.5227L116.355 104.484M43.9644 87.8908L41.5461 85.4931C35.8377 79.8321 32.9838 77.0016 29.7084 75.9681C26.8284 75.0593 23.7337 75.0955 20.8748 76.0701C17.625 77.178 14.8363 80.0736 9.25957 85.8642L3.33366 91.8284M43.9644 87.8908L15.5524 116.359M116.355 104.484C116.135 106.269 115.761 107.68 115.123 108.932C113.765 111.597 111.598 113.765 108.932 115.123C105.901 116.667 101.934 116.667 94.0003 116.667H26.0003C21.3657 116.667 18.084 116.667 15.5524 116.359M116.355 104.484C116.667 101.948 116.667 98.6575 116.667 94.0002V26.0002C116.667 18.0661 116.667 14.099 115.123 11.0686C113.765 8.40297 111.598 6.23575 108.932 4.87759C105.901 3.3335 101.934 3.3335 94.0003 3.3335H26.0003C18.0663 3.3335 14.0989 3.3335 11.0686 4.87759C8.40319 6.23575 6.2357 8.40297 4.87783 11.0686C3.33366 14.099 3.33366 18.0661 3.33366 26.0002V91.8284M3.33366 91.8284V94.0002C3.33366 101.934 3.33366 105.902 4.87783 108.932C6.2357 111.597 8.40319 113.765 11.0686 115.123C12.3288 115.765 13.7511 116.14 15.5524 116.359M24.5837 38.7494C24.5837 46.5737 30.9261 52.9161 38.7503 52.9161C46.5746 52.9161 52.917 46.5737 52.917 38.7494C52.917 30.9253 46.5746 24.5827 38.7503 24.5827C30.9261 24.5827 24.5837 30.9253 24.5837 38.7494Z" stroke="#0C456F" stroke-width="6.33" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-        <span>Drop it or click me...</span>
-    </div>
-    </div>
+                    <button id="generate-offline-qr" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z"
+                                fill="white" />
+                        </svg>Download your Offline QR<svg xmlns="http://www.w3.org/2000/svg" width="30" height="31"
+                            viewBox="0 0 30 31" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z"
+                                fill="white" />
+                        </svg>
+                    </button>
+                </div>
 
-    <!-- Personal Information -->
-    <div class="form-row">
-        <div class="input-wrapper">
-            <label for="first-name">First Name:</label>
-            <input type="text" id="first-name" name="first-name" placeholder="Enter First Name...">
-        </div>
-        <div class="input-wrapper">
-            <label for="last-name">Last Name:</label>
-            <input type="text" id="last-name" name="last-name" placeholder="Enter Last Name...">
-        </div>
-    </div>
 
-    <!-- Email and Phone -->
-    <div class="form-row">
-        <div class="input-wrapper">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter Email...">
-        </div>
-        <div class="input-wrapper">
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone" placeholder="Enter Phone...">
-        </div>
-    </div>
 
-    <!-- Work Information -->
-    <div class="form-row">
-        <div class="input-wrapper">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" placeholder="Enter Title...">
-        </div>
-        <div class="input-wrapper">
-            <label for="company">Company:</label>
-            <input type="text" id="company" name="company" placeholder="Enter Company...">
-        </div>
-    </div>
+                <div class="form-container">
+                    <div class="image">
+                        <img src="imgs/Frame.png" alt="">
+                    </div>
+                    <form>
+                        <div class="form-row">
+                            <div id="dropZone" class="drop-zone">
+                                <img id="previewImage">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"
+                                    fill="none">
+                                    <path
+                                        d="M43.9644 87.8908L55.7801 76.1742C61.4814 70.5196 64.3325 67.6927 67.6036 66.6592C70.4808 65.7504 73.5734 65.7837 76.4303 66.7548C79.6787 67.8591 82.4677 70.747 88.0455 76.5227L116.355 104.484M43.9644 87.8908L41.5461 85.4931C35.8377 79.8321 32.9838 77.0016 29.7084 75.9681C26.8284 75.0593 23.7337 75.0955 20.8748 76.0701C17.625 77.178 14.8363 80.0736 9.25957 85.8642L3.33366 91.8284M43.9644 87.8908L15.5524 116.359M116.355 104.484C116.135 106.269 115.761 107.68 115.123 108.932C113.765 111.597 111.598 113.765 108.932 115.123C105.901 116.667 101.934 116.667 94.0003 116.667H26.0003C21.3657 116.667 18.084 116.667 15.5524 116.359M116.355 104.484C116.667 101.948 116.667 98.6575 116.667 94.0002V26.0002C116.667 18.0661 116.667 14.099 115.123 11.0686C113.765 8.40297 111.598 6.23575 108.932 4.87759C105.901 3.3335 101.934 3.3335 94.0003 3.3335H26.0003C18.0663 3.3335 14.0989 3.3335 11.0686 4.87759C8.40319 6.23575 6.2357 8.40297 4.87783 11.0686C3.33366 14.099 3.33366 18.0661 3.33366 26.0002V91.8284M3.33366 91.8284V94.0002C3.33366 101.934 3.33366 105.902 4.87783 108.932C6.2357 111.597 8.40319 113.765 11.0686 115.123C12.3288 115.765 13.7511 116.14 15.5524 116.359M24.5837 38.7494C24.5837 46.5737 30.9261 52.9161 38.7503 52.9161C46.5746 52.9161 52.917 46.5737 52.917 38.7494C52.917 30.9253 46.5746 24.5827 38.7503 24.5827C30.9261 24.5827 24.5837 30.9253 24.5837 38.7494Z"
+                                        stroke="#0C456F" stroke-width="6.33" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                <span>Drop it or click me...</span>
+                            </div>
+                        </div>
 
-    <!-- Location Information -->
-    <div class="form-row">
-        <div class="input-wrapper">
-            <label for="location">Location:</label>
-            <div style="display:flex;">
-                <input  type="text" id="location" name="location" placeholder="Open The Map =>" disabled >
-                <button type="button" id="btn-location">MAP</button>
+                        <!-- Personal Information -->
+                        <div class="form-row">
+                            <div class="input-wrapper">
+                                <label for="first-name">First Name:</label>
+                                <input type="text" id="first-name" name="first-name" placeholder="Enter First Name...">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="last-name">Last Name:</label>
+                                <input type="text" id="last-name" name="last-name" placeholder="Enter Last Name...">
+                            </div>
+                        </div>
+
+                        <!-- Email and Phone -->
+                        <div class="form-row">
+                            <div class="input-wrapper">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" placeholder="Enter Email...">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="phone">Phone:</label>
+                                <input type="text" id="phone" name="phone" placeholder="Enter Phone...">
+                            </div>
+                        </div>
+
+                        <!-- Work Information -->
+                        <div class="form-row">
+                            <div class="input-wrapper">
+                                <label for="title">Title:</label>
+                                <input type="text" id="title" name="title" placeholder="Enter Title...">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="company">Company:</label>
+                                <input type="text" id="company" name="company" placeholder="Enter Company...">
+                            </div>
+                        </div>
+
+                        <!-- Location Information -->
+                        <div class="form-row">
+                            <div class="input-wrapper">
+                                <label for="location">Location:</label>
+                                <div style="display:flex;">
+                                    <input type="text" id="location" name="location" placeholder="Open The Map =>"
+                                        disabled>
+                                    <button type="button" id="btn-location">MAP</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Work Information -->
+                        <div class="form-row">
+                            <div class="input-wrapper">
+                                <label for="work-info">Work Information:</label>
+                                <input id="work-info" name="work-info" placeholder="Enter Work Information...">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <input type="color" id="colorPicker" value="#1278C2">
+                        </div>
+                        <!-- Social Media Information -->
+                        <div class="form-row">
+                            <div class="input-wrapper">
+                                <label for="facebook">Facebook:</label>
+                                <input type="text" id="facebook" name="facebook" placeholder="Enter Facebook Link...">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="telegram">Telegram:</label>
+                                <input type="text" id="telegram" name="telegram" placeholder="Enter Phone...">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="linkedin">LinkedIn:</label>
+                                <input type="text" id="linkedin" name="linkedin" placeholder="Enter LinkedIn Link...">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="toggle">
+                    <button class="toggle-btn" id="toggle-card-1">OFFLINE qr code</button>
+                    <button class="toggle-btn" id="toggle-card-2">ONLINE qr code</button>
+                </div>
+
+                <div class="card-container online">
+                    <span class="cardtitle">ONline qr code</span>
+                    <div class="card">
+                        <div class="logo"></div>
+                        <span class="title">
+
+                        </span>
+                        <span class="name">
+                            Your Name
+                        </span>
+                        <div class="job">
+                            Your Job or title
+                        </div>
+                        <div id="QR-contaner">
+                            <img id="qrurl-code">
+                        </div>
+                        <span class="link">
+                            <a id="linkContact" href="">Your link</a>
+                        </span>
+                        <div class="logo"></div>
+                    </div>
+                    <button id="generate-online-qr" class="btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z"
+                                fill="white" />
+                        </svg>Download your Online QR<svg xmlns="http://www.w3.org/2000/svg" width="30" height="31"
+                            viewBox="0 0 30 31" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z"
+                                fill="white" />
+                        </svg>
+                    </button>
+                </div>
             </div>
+            <footer>
+                <span>©2023 all rights reserved</span>
+                <span>With love by <a href="https://www.linkedin.com/company/eliteztech/">ElitesXTech</a></span>
+                <span><a href="">privacy and policy</a></span>
+            </footer>
         </div>
-    </div>
 
-    <!-- Work Information -->
-    <div class="form-row">
-        <div class="input-wrapper">
-            <label for="work-info">Work Information:</label>
-            <input id="work-info" name="work-info" placeholder="Enter Work Information...">
-        </div>
-    </div>
-    <div class="form-row">
-        <input type="color" id="colorPicker" value="#1278C2">
-     </div>
-    <!-- Social Media Information -->
-    <div class="form-row">
-        <div class="input-wrapper">
-            <label for="facebook">Facebook:</label>
-            <input type="text" id="facebook" name="facebook" placeholder="Enter Facebook Link...">
-        </div>
-        <div class="input-wrapper">
-            <label for="telegram">Telegram:</label>
-            <input type="text" id="telegram" name="telegram" placeholder="Enter Phone...">
-        </div>
-        <div class="input-wrapper">
-            <label for="linkedin">LinkedIn:</label>
-            <input type="text" id="linkedin" name="linkedin" placeholder="Enter LinkedIn Link...">
-        </div>
-    </div>
-</form>
-</div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+        <script type="text/javascript">
 
-<div class="toggle">
-<button class="toggle-btn" id="toggle-card-1">OFFLINE qr code</button>
-<button class="toggle-btn" id="toggle-card-2">ONLINE qr code</button>
-</div>
+        </script>
 
-  <div class="card-container online">
-        <span class="cardtitle">ONline qr code</span>
-    <div class="card">
-            <div class="logo"></div>
-        <span class="title">
-          
-        </span>
-        <span class="name">
-            Your Name
-        </span>
-        <div class="job"> 
-            Your Job or title
-        </div>
-        <div id="QR-contaner">
-                <img id="qrurl-code">
-        </div>
-        <span class="link">
-            <a  id="linkContact" href="">Your link</a>
-         </span>
-        <div class="logo"></div>
-    </div>
-        <div id="generate-qr" class="btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z" fill="white"/>
-            </svg>Download your Online QR<svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 15.2563C0 8.18525 -1.78813e-07 4.64973 2.1967 2.45305C4.39338 0.256347 7.9289 0.256348 14.9999 0.256348C22.0709 0.256348 25.6066 0.256347 27.8032 2.45305C29.9999 4.64973 29.9999 8.18525 29.9999 15.2563C29.9999 22.3273 29.9999 25.8629 27.8032 28.0595C25.6066 30.2562 22.0709 30.2562 14.9999 30.2562C7.9289 30.2562 4.39338 30.2562 2.1967 28.0595C-1.78813e-07 25.8629 0 22.3273 0 15.2563ZM14.9999 6.63133C15.6212 6.63133 16.1249 7.13501 16.1249 7.75632V15.5402L18.7045 12.9609C19.1438 12.5215 19.856 12.5215 20.2954 12.9609C20.7347 13.4002 20.7347 14.1124 20.2954 14.5517L15.7954 19.0517C15.5845 19.2628 15.2983 19.3813 14.9999 19.3813C14.7016 19.3813 14.4154 19.2628 14.2045 19.0517L9.70447 14.5517C9.26514 14.1124 9.26514 13.4002 9.70447 12.9609C10.1438 12.5215 10.8561 12.5215 11.2955 12.9609L13.875 15.5402V7.75632C13.875 7.13501 14.3787 6.63133 14.9999 6.63133ZM8.99997 21.6313C8.37866 21.6313 7.87497 22.135 7.87497 22.7563C7.87497 23.3776 8.37866 23.8813 8.99997 23.8813H20.9999C21.6212 23.8813 22.1249 23.3776 22.1249 22.7563C22.1249 22.135 21.6212 21.6313 20.9999 21.6313H8.99997Z" fill="white"/>
-            </svg>
-        </div>
-</div>
-</div>
-<footer>
-    <span>©2023 all rights reserved</span>
-    <span>With love by <a href="https://www.linkedin.com/company/eliteztech/">ElitesXTech</a></span>
-    <span><a href="">privacy and policy</a></span>
-</footer>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
-    <script type="text/javascript">
-
-    </script>
-
-<script type="text/javascript">
-    // Single Page Apps for GitHub Pages
-    // https://github.com/rafrex/spa-github-pages
-    // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-    // ----------------------------------------------------------------------
-    // This script checks to see if a redirect is present in the query string
-    // and converts it back into the correct url and adds it to the
-    // browser's history using window.history.replaceState(...),
-    // which won't cause the browser to attempt to load the new url.
-    // When the single page app is loaded further down in this file,
-    // the correct url will be waiting in the browser's history for
-    // the single page app to route accordingly.
-    (function (l) {
-        if (l.search) {
-            var q = {};
-            l.search.slice(1).split('&').forEach(function (v) {
-                var a = v.split('=');
-                q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-            });
-            if (q.p !== undefined) {
-                window.history.replaceState(null, null,
-                    l.pathname.slice(0, -1) + (q.p || '') +
-                    (q.q ? ('?' + q.q) : '') +
-                    l.hash
-                );
+        <script type="text/javascript">
+            // Single Page Apps for GitHub Pages
+            // https://github.com/rafrex/spa-github-pages
+            // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+            // ----------------------------------------------------------------------
+            // This script checks to see if a redirect is present in the query string
+            // and converts it back into the correct url and adds it to the
+            // browser's history using window.history.replaceState(...),
+            // which won't cause the browser to attempt to load the new url.
+            // When the single page app is loaded further down in this file,
+            // the correct url will be waiting in the browser's history for
+            // the single page app to route accordingly.
+            (function (l) {
+                if (l.search) {
+                    var q = {};
+                    l.search.slice(1).split('&').forEach(function (v) {
+                        var a = v.split('=');
+                        q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+                    });
+                    if (q.p !== undefined) {
+                        window.history.replaceState(null, null,
+                            l.pathname.slice(0, -1) + (q.p || '') +
+                            (q.q ? ('?' + q.q) : '') +
+                            l.hash
+                        );
+                    }
+                }
+            }(window.location))
+        </script>
+        <script integrity="">
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('js/service-worker.js')
+                        .then(registration => {
+                            console.log('Service worker registered:', registration);
+                        })
+                        .catch(error => {
+                            console.error('Service worker registration failed:', error);
+                        });
+                });
             }
-        }
-    }(window.location))
-</script>
-<script integrity="">
-if ('serviceWorker' in navigator) {
-window.addEventListener('load', () => {
-  navigator.serviceWorker.register('js/service-worker.js')
-    .then(registration => {
-      console.log('Service worker registered:', registration);
-    })
-    .catch(error => {
-      console.error('Service worker registration failed:', error);
-    });
-});
-}
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
-<script src="js/qr.js"></script>
-<script src="js/js.js"></script>
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+        <script src="js/qr.js"></script>
+        <script src="js/js.js"></script>
 </body>
+
 </html>

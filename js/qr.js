@@ -1,7 +1,35 @@
 
 
 const map = L.map('mapid');
-function SelectLocation() {
+
+const DownloadOfflineQR = () => {
+    var firstName =  document.getElementById('first-name').value;
+var lastName =  document.getElementById('last-name').value;
+    const canvas = document.getElementById('qr-code');
+    const a = document.createElement("a");
+            a.href = canvas.src;
+            a.download = `${firstName}-${lastName}-Offline-Qr.jpg`;
+            a.click();
+            a.remove();
+}
+
+const DownloadOnlineQR = () => {
+    var firstName =  document.getElementById('first-name').value;
+var lastName =  document.getElementById('last-name').value;
+    const canvas = document.getElementById('qrurl-code');
+    const a = document.createElement("a");
+            a.href = canvas.src;
+            a.download = `${firstName}-${lastName}-Online-Qr.jpg`;
+            a.click();
+            a.remove();
+
+}
+const DownloadOfflineQRBtn = document.getElementById('generate-offline-qr'); 
+const DownloadOnlineQRBtn = document.getElementById('generate-online-qr'); 
+
+DownloadOfflineQRBtn.addEventListener('click', () => DownloadOfflineQR());
+DownloadOnlineQRBtn.addEventListener('click', () => DownloadOnlineQR());
+const SelectLocation = () => {
     $("#mapid").toggleClass("show");
     $("#close").toggleClass("show");
     $("#mapid").css("height", "100vh");
@@ -135,7 +163,13 @@ $(document).ready(function () {
                     background: "#fff"
                 });
             }
+            MakeIcon();
         });
+
+     
+        MakeIcon();
+
+
 
         function isLightColor(color) {
             const hex = color.replace("#", "");
@@ -145,6 +179,48 @@ $(document).ready(function () {
             const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
             return luma > 160;
         }
+
+function MakeIcon(){
+    const qrurl =  document.getElementById('qrurl-code');
+
+    const icon = new Image();
+    icon.src = "icon.png"; // Replace with the path to your icon
+    icon.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = qrurl.width;
+        canvas.height = qrurl.height;
+        const context = canvas.getContext("2d");
+        context.drawImage(qrurl, 0, 0);
+        
+        const iconSize = 50; // Adjust the icon size as needed
+        const centerX = canvas.width / 2 - iconSize / 2;
+        const centerY = canvas.height / 2 - iconSize / 2;
+        context.drawImage(icon, centerX, centerY, iconSize, iconSize);
+
+        qrurl.src = canvas.toDataURL();}
+
+
+
+        const qrc =  document.getElementById('qr-code');
+
+        const icon2 = new Image();
+        icon2.src = "icon.png"; // Replace with the path to your icon
+        icon2.onload = () => {
+            const canvas2 = document.createElement("canvas");
+            canvas2.width = qrc.width;
+            canvas2.height = qrc.height;
+            const context = canvas2.getContext("2d");
+            context.drawImage(qrc, 0, 0);
+            
+            const iconSize = 50; // Adjust the icon size as needed
+            const centerX = canvas2.width / 2 - iconSize / 2;
+            const centerY = canvas2.height / 2 - iconSize / 2;
+            context.drawImage(icon2, centerX, centerY, iconSize, iconSize);
+
+            qrc.src = canvas2.toDataURL();}
+
+
+}
 
     }
 
