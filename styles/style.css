@@ -16,6 +16,7 @@ body {
     flex-shrink: 0;
     border-radius: 55.587px;
     border: 10px solid #36BBE4;
+    align-items: center;
 }
 
 .main {
