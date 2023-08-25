@@ -151,13 +151,13 @@ $(document).ready(function () {
     function createVCard(firstName, lastName, email, phone, title, company, workInfo, location, facebook, linkedin, telegram) {
         var vCard = `BEGIN:VCARD
 VERSION:3.0
-N:${lastName};${firstName};;;
-FN:${firstName} ${lastName}
-EMAIL:${email}
+FN;CHARSET=UTF-8:${firstName} ${lastName}
+N;CHARSET=UTF-8:${lastName};${firstName};;;
+EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:${email}
 TEL;TYPE=CELL:${phone}
-ORG:${company}
-TITLE:${title}
-  END:VCARD`;
+ORG;CHARSET=UTF-8:${company}
+TITLE;CHARSET=UTF-8:${title}
+END:VCARD`;
 
         return vCard;
     }
