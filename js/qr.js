@@ -212,7 +212,7 @@ function MakeIcon(){
             const context = canvas2.getContext("2d");
             context.drawImage(qrc, 0, 0);
             
-            const iconSize = 50; // Adjust the icon size as needed
+            const iconSize = 35; // Adjust the icon size as needed
             const centerX = canvas2.width / 2 - iconSize / 2;
             const centerY = canvas2.height / 2 - iconSize / 2;
             context.drawImage(icon2, centerX, centerY, iconSize, iconSize);
