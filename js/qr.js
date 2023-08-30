@@ -3,29 +3,29 @@
 const map = L.map('mapid');
 
 const DownloadOfflineQR = () => {
-    var firstName =  document.getElementById('first-name').value;
-var lastName =  document.getElementById('last-name').value;
+    var firstName = document.getElementById('first-name').value;
+    var lastName = document.getElementById('last-name').value;
     const canvas = document.getElementById('qr-code');
     const a = document.createElement("a");
-            a.href = canvas.src;
-            a.download = `${firstName}-${lastName}-Offline-Qr.jpg`;
-            a.click();
-            a.remove();
+    a.href = canvas.src;
+    a.download = `${firstName}-${lastName}-Offline-Qr.jpg`;
+    a.click();
+    a.remove();
 }
 
 const DownloadOnlineQR = () => {
-    var firstName =  document.getElementById('first-name').value;
-var lastName =  document.getElementById('last-name').value;
+    var firstName = document.getElementById('first-name').value;
+    var lastName = document.getElementById('last-name').value;
     const canvas = document.getElementById('qrurl-code');
     const a = document.createElement("a");
-            a.href = canvas.src;
-            a.download = `${firstName}-${lastName}-Online-Qr.jpg`;
-            a.click();
-            a.remove();
+    a.href = canvas.src;
+    a.download = `${firstName}-${lastName}-Online-Qr.jpg`;
+    a.click();
+    a.remove();
 
 }
-const DownloadOfflineQRBtn = document.getElementById('generate-offline-qr'); 
-const DownloadOnlineQRBtn = document.getElementById('generate-online-qr'); 
+const DownloadOfflineQRBtn = document.getElementById('generate-offline-qr');
+const DownloadOnlineQRBtn = document.getElementById('generate-online-qr');
 
 DownloadOfflineQRBtn.addEventListener('click', () => DownloadOfflineQR());
 DownloadOnlineQRBtn.addEventListener('click', () => DownloadOnlineQR());
@@ -166,7 +166,7 @@ $(document).ready(function () {
             MakeIcon();
         });
 
-     
+
         MakeIcon();
 
 
@@ -180,47 +180,49 @@ $(document).ready(function () {
             return luma > 160;
         }
 
-function MakeIcon(){
-    const qrurl =  document.getElementById('qrurl-code');
+        function MakeIcon() {
+            const qrurl = document.getElementById('qrurl-code');
 
-    const icon = new Image();
-    icon.src = "icon.png"; // Replace with the path to your icon
-    icon.onload = () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = qrurl.width;
-        canvas.height = qrurl.height;
-        const context = canvas.getContext("2d");
-        context.drawImage(qrurl, 0, 0);
-        
-        const iconSize = 50; // Adjust the icon size as needed
-        const centerX = canvas.width / 2 - iconSize / 2;
-        const centerY = canvas.height / 2 - iconSize / 2;
-        context.drawImage(icon, centerX, centerY, iconSize, iconSize);
+            const icon = new Image();
+            icon.src = "icon.png"; // Replace with the path to your icon
+            icon.onload = () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = qrurl.width;
+                canvas.height = qrurl.height;
+                const context = canvas.getContext("2d");
+                context.drawImage(qrurl, 0, 0);
 
-        qrurl.src = canvas.toDataURL();}
+                const iconSize = 50; // Adjust the icon size as needed
+                const centerX = canvas.width / 2 - iconSize / 2;
+                const centerY = canvas.height / 2 - iconSize / 2;
+                context.drawImage(icon, centerX, centerY, iconSize, iconSize);
 
-
-
-        const qrc =  document.getElementById('qr-code');
-
-        const icon2 = new Image();
-        icon2.src = "icon.png"; // Replace with the path to your icon
-        icon2.onload = () => {
-            const canvas2 = document.createElement("canvas");
-            canvas2.width = qrc.width;
-            canvas2.height = qrc.height;
-            const context = canvas2.getContext("2d");
-            context.drawImage(qrc, 0, 0);
-            
-            const iconSize = 35; // Adjust the icon size as needed
-            const centerX = canvas2.width / 2 - iconSize / 2;
-            const centerY = canvas2.height / 2 - iconSize / 2;
-            context.drawImage(icon2, centerX, centerY, iconSize, iconSize);
-
-            qrc.src = canvas2.toDataURL();}
+                qrurl.src = canvas.toDataURL();
+            }
 
 
-}
+
+            const qrc = document.getElementById('qr-code');
+
+            const icon2 = new Image();
+            icon2.src = "icon.png"; // Replace with the path to your icon
+            icon2.onload = () => {
+                const canvas2 = document.createElement("canvas");
+                canvas2.width = qrc.width;
+                canvas2.height = qrc.height;
+                const context = canvas2.getContext("2d");
+                context.drawImage(qrc, 0, 0);
+
+                const iconSize = 35; // Adjust the icon size as needed
+                const centerX = canvas2.width / 2 - iconSize / 2;
+                const centerY = canvas2.height / 2 - iconSize / 2;
+                context.drawImage(icon2, centerX, centerY, iconSize, iconSize);
+
+                qrc.src = canvas2.toDataURL();
+            }
+
+
+        }
 
     }
 
@@ -233,6 +235,9 @@ EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:${email}
 TEL;TYPE=CELL:${phone}
 ORG;CHARSET=UTF-8:${company}
 TITLE;CHARSET=UTF-8:${title}
+${telegram && `URL;CHARSET=UTF-8;type=linkedin:https://t.me/${telegram}`}
+${facebook && `URL;CHARSET=UTF-8;type=facebook:${facebook}`}
+${linkedin && `URL;CHARSET=UTF-8;type=linkedin:${linkedin}`}
 END:VCARD`;
 
         return vCard;
